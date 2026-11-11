@@ -1,3 +1,116 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Speed Crisis</title><link rel="stylesheet" href="style.css"></head>
-<body><canvas id="c"></canvas><div id="ui"></div><script src="data.js"></script><script src="world.js"></script><script src="game.js"></script><script src="r3d_core.js"></script><script src="r3d_world.js"></script><script src="r3d_sprite.js"></script><script src="r3d_cars.js"></script><script src="r3d_hud.js"></script><script src="r3d_menu.js"></script><script src="r3d_ctrl.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#06080f">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>UMUHANDA — Highway Pursuit</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="stylesheet" href="css/game.css">
+</head>
+<body>
+<canvas id="gl"></canvas>
+<div id="speedfx"></div><div id="sirenfx"></div><div id="flashfx"></div>
+
+<!-- HUD -->
+<div id="hud" class="hide">
+  <div id="topL"><div id="score">0</div><div id="combo"></div><div id="distT">0.0 km</div></div>
+  <div id="topC" class="hide">
+    <div class="heat"><span id="heatN">HEAT 1</span> <span id="copN"></span> <span id="tkN"></span></div>
+    <div class="bar bust"><i id="bustFill"></i><b>BUSTED</b></div>
+    <div class="bar esc"><i id="escFill"></i><b>ESCAPE</b></div>
+  </div>
+  <div id="topR"><div class="cash">$ ∞</div><button id="pauseBtn" aria-label="Pause">❚❚</button></div>
+  <div id="pops"></div>
+  <div id="hint"></div>
+  <div id="carBadge"><img id="hudImg" alt=""><span id="hudCar"></span><em id="hudTrack"></em></div>
+  <div id="botL"><div class="lab">DAMAGE</div><div class="bar hp"><i id="hpFill"></i></div></div>
+  <div id="botC"><div id="spd">0</div><div id="spdU">KM/H</div><div id="gearRow"><span id="gear">1</span><div class="bar rpm"><i id="rpmFill"></i></div></div></div>
+  <div id="botR"><div class="lab">NITRO</div><div class="bar nit"><i id="nitFill"></i></div></div>
+  <div id="touch">
+    <div class="tpad left"><button id="tL">◀</button><button id="tR">▶</button></div>
+    <div class="tpad right"><button id="tC">📷</button><button id="tN">N₂O</button><button id="tB">BRAKE</button></div>
+  </div>
+</div>
+
+<!-- TITLE -->
+<section id="title" class="screen">
+  <div class="logo"><small>HIGHWAY PURSUIT</small><h1>UMUHANDA</h1></div>
+  <div class="menu">
+    <button class="big" id="bPlay">▶ PLAY</button>
+    <button class="big alt" id="bGarage">GARAGE</button>
+    <button class="big alt" id="bSet">SETTINGS</button>
+  </div>
+  <div class="cashbadge">CASH <b>$ ∞</b> <span>unlimited — buy anything</span></div>
+</section>
+
+<!-- MODE SELECT -->
+<section id="modes" class="screen hide">
+  <div class="panel wide">
+    <h2>CHOOSE YOUR RUN</h2>
+    <div class="cards">
+      <button class="card sel" data-mode="highway"><h3>HIGHWAY RUSH</h3><p>Two-way traffic. Chain near misses, drive in the oncoming lane for double points.</p><em id="bestH"></em></button>
+      <button class="card" data-mode="pursuit"><h3>HOT PURSUIT</h3><p>The police are after you. Ram cops, dodge roadblocks, shake them off to raise the heat.</p><em id="bestP"></em></button>
+    </div>
+    <h4>TRACK</h4>
+    <button class="trackcard" id="trackCard"><img id="tcImg" alt=""><div><b id="tcName">—</b><span id="tcMeta"></span></div><u>CHANGE ▸</u></button>
+    <h4>TIME &amp; WEATHER</h4>
+    <div class="chips" id="themeChips"><button data-t="auto" class="on">★ Track default</button><button data-t="day">☀ Day</button><button data-t="sunset">🌇 Sunset</button><button data-t="night">🌙 Night</button><button data-t="rain">🌧 Rain</button></div>
+    <h4>TRAFFIC</h4>
+    <div class="chips" id="densChips"><button data-d="0.6">Light</button><button data-d="1" class="on">Normal</button><button data-d="1.5">Heavy</button></div>
+    <div class="row"><button class="big alt" id="mBack">BACK</button><button class="big" id="mGo">START ▶</button></div>
+  </div>
+</section>
+
+<!-- TRACKS -->
+<section id="tracks" class="screen hide">
+  <div class="gTop"><button class="small" id="tBack">◀ BACK</button><input id="tSearch" placeholder="Search 100 circuits…"><div class="chips" id="tFilter"><button data-f="" class="on">All</button><button data-f="neon">Neon city</button><button data-f="city">City</button><button data-f="forest">Forest</button><button data-f="open">Open</button><button data-f="oval">Speedway</button></div></div>
+  <div id="tGrid" class="grid"></div>
+</section>
+
+<!-- GARAGE -->
+<section id="garage" class="screen hide">
+  <div class="gTop"><button class="small" id="gBack">◀ BACK</button><input id="gSearch" placeholder="Search 105 cars…"><div class="cash">$ ∞</div></div>
+  <div class="gInfo">
+    <h2 id="gName">—</h2><div id="gCls" class="muted"></div>
+    <div id="gPhoto"><img id="gImg" alt=""><small>Reference photo — the in-game body is the closest 3D shape</small></div>
+    <div class="stats" id="gStats"></div>
+    <div class="row"><button class="big" id="gBuy">BUY</button></div>
+    <div id="gCustom">
+      <h4>PAINT</h4><div class="sw" id="gPaint"></div>
+      <h4>NEON UNDERGLOW</h4><div class="sw" id="gGlow"></div>
+      <h4>UPGRADES <span class="muted">(free)</span></h4><div id="gUp"></div>
+    </div>
+  </div>
+  <div id="gList" class="strip"></div>
+</section>
+
+<!-- SETTINGS -->
+<section id="settings" class="screen hide">
+  <div class="panel">
+    <h2>SETTINGS</h2>
+    <label>Graphics quality<select id="sQual"><option value="1">Fast</option><option value="1.5" selected>Balanced</option><option value="2">Sharp</option></select></label>
+    <label>Driving assist (easier turns)<select id="sAssist"><option value="1" selected>On</option><option value="0">Off — pro</option></select></label>
+    <label>Auto accelerate<select id="sGas"><option value="1" selected>On</option><option value="0">Off (hold ↑ / W)</option></select></label>
+    <label>Sound<select id="sSnd"><option value="1" selected>On</option><option value="0">Off</option></select></label>
+    <label>Controls<select id="sDev"><option value="auto" selected>Auto-detect</option><option value="touch">Touch screen</option><option value="keyboard">Keyboard</option><option value="pad">Gamepad</option></select></label>
+    <label>Steering (touch)<select id="sTilt"><option value="0" selected>Buttons</option><option value="1">Tilt phone</option></select></label>
+    <p class="muted keys" id="keysInfo">Keys: ← → / A D steer · ↑ W gas · ↓ S Space brake · Shift / N nitro · C camera · P pause<br>Phone: on-screen buttons. Gamepad supported.</p>
+    <button class="big" id="sBack">DONE</button>
+  </div>
+</section>
+
+<!-- PAUSE / RESULT -->
+<section id="pause" class="screen hide"><div class="panel"><h2>PAUSED</h2>
+  <button class="big" id="pResume">RESUME</button><button class="big alt" id="pRestart">RESTART</button><button class="big alt" id="pQuit">QUIT TO MENU</button></div></section>
+<section id="over" class="screen hide"><div class="panel"><h2 id="oTitle">WRECKED</h2><div id="oStats" class="ostats"></div>
+  <button class="big" id="oAgain">RACE AGAIN</button><button class="big alt" id="oGarage">GARAGE</button><button class="big alt" id="oMenu">MENU</button></div></section>
+
+<script type="module" src="js/game.js"></script>
+<script>if('serviceWorker' in navigator && location.protocol!=='file:'){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}</script>
+</body>
+</html>

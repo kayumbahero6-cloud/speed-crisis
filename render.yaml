@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: umuhanda
+    runtime: static
+    buildCommand: npm ci && npm run render
+    staticPublishPath: dist
+    envVars:
+      - key: SKETCHFAB_TOKEN
+        sync: false          # paste your Sketchfab API token in the Render dashboard
+      - key: BUDGET_MB
+        value: "800"
+      - key: HDRI_RES
+        value: "2k"

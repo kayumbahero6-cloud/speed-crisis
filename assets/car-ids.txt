@@ -1,0 +1,106 @@
+# Put one model per car in assets/cars/<id>.glb  (id on the left, car name on the right)
+autozam-az-1	Autozam AZ-1
+caterham-seven-420-cup	Caterham Seven 420 Cup
+aixam-mega-track	Aixam Mega Track
+honda-prelude-type-sh	Honda Prelude Type SH
+fiat-coupe-20v-turbo	Fiat Coupe 20V Turbo
+mazda-rx-3-sp	Mazda RX-3 SP
+nissan-silvia-k-s-s13	Nissan Silvia K's (S13)
+renault-clio-v6-phase-ii	Renault Clio V6 Phase II
+lancia-fulvia-coup-hf	Lancia Fulvia Coupé HF
+mitsubishi-fto-gp-version-r	Mitsubishi FTO GP Version R
+toyota-mr2-supercharged-aw11	Toyota MR2 Supercharged (AW11)
+alfa-romeo-sz	Alfa Romeo SZ
+volkswagen-corrado-vr6	Volkswagen Corrado VR6
+nissan-370z-nismo	Nissan 370Z NISMO
+audi-tt-rs-heritage	Audi TT RS Heritage
+ginetta-g40-grdc	Ginetta G40 GRDC
+mazda-rx-8-spirit-r	Mazda RX-8 Spirit R
+datsun-cherry-x-1-r	Datsun Cherry X-1 R
+mitsubishi-starion-esi-r	Mitsubishi Starion ESI-R
+de-tomaso-vallelunga	De Tomaso Vallelunga
+opel-astra-opc-extreme	Opel Astra OPC Extreme
+peugeot-rcz-r	Peugeot RCZ R
+porsche-911-rs-3-8-964	Porsche 911 RS 3.8 (964)
+abarth-695-biposto	Abarth 695 Biposto
+porsche-911-sport-classic-992	Porsche 911 Sport Classic (992)
+toyota-gr-yaris-morizo-edition	Toyota GR Yaris Morizo Edition
+honda-integra-type-r-dc2	Honda Integra Type R (DC2)
+hyundai-i30-n-drive-n	Hyundai i30 N Drive-N
+porsche-968-turbo-s	Porsche 968 Turbo S
+nissan-pulsar-gti-r	Nissan Pulsar GTI-R
+jaguar-xkr-portfolio	Jaguar XKR Portfolio
+bmw-m3-gts-e92	BMW M3 GTS (E92)
+lotus-elise-cup-250	Lotus Elise Cup 250
+bristol-fighter	Bristol Fighter
+chevrolet-camaro-z-28	Chevrolet Camaro Z/28
+ferrari-430-scuderia	Ferrari 430 Scuderia
+ferrari-512-bb	Ferrari 512 BB
+ferrari-348-gt-competizione	Ferrari 348 GT Competizione
+mercedes-benz-sl-65-black-series	Mercedes-Benz SL 65 Black Series
+lotus-evora-gt430	Lotus Evora GT430
+volvo-s60-polestar	Volvo S60 Polestar
+de-tomaso-mangusta	De Tomaso Mangusta
+lamborghini-islero	Lamborghini Islero
+ford-mustang-boss-302	Ford Mustang Boss 302
+ford-falcon-gt-ho-phase-iii	Ford Falcon GT-HO Phase III
+maserati-granturismo-mc-stradale	Maserati GranTurismo MC Stradale
+qvale-mangusta	Qvale Mangusta
+saab-900-turbo-commemorative	Saab 900 Turbo Commemorative
+lexus-is-f-ccs-r	Lexus IS F CCS-R
+lotus-exige-cup-430	Lotus Exige Cup 430
+subaru-wrx-sti-type-ra-r	Subaru WRX STI Type RA-R
+chevrolet-corvette-zr1-c4	Chevrolet Corvette ZR1 (C4)
+dodge-viper-gts-r-homologation	Dodge Viper GTS-R Homologation
+lamborghini-centenario	Lamborghini Centenario
+isdera-erator-gtr	Isdera Erator GTR
+lamborghini-essenza-scv12	Lamborghini Essenza SCV12
+isdera-imperator-108i	Isdera Imperator 108i
+elfin-ms8-streamliner	Elfin MS8 Streamliner
+ferrari-599-gto	Ferrari 599 GTO
+joss-jt1	Joss JT1
+maserati-mc12-versione-corse	Maserati MC12 Versione Corse
+mclaren-elva	McLaren Elva
+lister-storm-gt	Lister Storm GT
+jaguar-xjr-15	Jaguar XJR-15
+ferrari-monza-sp1	Ferrari Monza SP1
+panoz-esperante-gtr-1	Panoz Esperante GTR-1
+porsche-911-gt1-evolution	Porsche 911 GT1 Evolution
+lamborghini-sesto-elemento	Lamborghini Sesto Elemento
+ascari-ecosse	Ascari Ecosse
+bmw-m5-cs	BMW M5 CS
+pagani-zonda-roadster-f	Pagani Zonda Roadster F
+pagani-zonda-cinque	Pagani Zonda Cinque
+porsche-911-gt2-rs-991	Porsche 911 GT2 RS (991)
+arrera-tsx	Arrera TSX
+aston-martin-vantage-gt8	Aston Martin Vantage GT8
+aston-martin-victor	Aston Martin Victor
+porsche-911-gt3-rs-992	Porsche 911 GT3 RS (992)
+ford-gt90-concept	Ford GT90 Concept
+mercedes-benz-c63-amg-black-series	Mercedes-Benz C63 AMG Black Series
+mercedes-benz-clk-63-black-series	Mercedes-Benz CLK 63 Black Series
+covini-c6w	Covini C6W
+ferrari-f12tdf	Ferrari F12tdf
+ferrari-f40	Ferrari F40
+callaway-corvette-sledgehammer	Callaway Corvette Sledgehammer
+ferrari-j50	Ferrari J50
+spyker-c8-preliator	Spyker C8 Preliator
+bugatti-centodieci	Bugatti Centodieci
+naran-hyper-coupe	Naran Hyper Coupe
+aston-martin-one-77	Aston Martin One-77
+bugatti-divo	Bugatti Divo
+rimac-concept-one	Rimac Concept_One
+lamborghini-veneno	Lamborghini Veneno
+mclaren-speedtail	McLaren Speedtail
+mclaren-sabre	McLaren Sabre
+aston-martin-valkyrie	Aston Martin Valkyrie
+koenigsegg-one-1	Koenigsegg One:1
+w-motors-fenyr-supersport	W Motors Fenyr SuperSport
+devel-sixteen	Devel Sixteen
+mclaren-f1	McLaren F1
+tushek-ts-900-apex	Tushek TS 900 Apex
+ferrari-sf90-xx-stradale	Ferrari SF90 XX Stradale
+lamborghini-sian-fkp-37	Lamborghini Sian FKP 37
+bugatti-mistral	Bugatti Mistral
+bugatti-chiron-super-sport	Bugatti Chiron Super Sport
+koenigsegg-cc850	Koenigsegg CC850
