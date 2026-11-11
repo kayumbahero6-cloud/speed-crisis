@@ -2,7 +2,7 @@ services:
   - type: web
     name: speed-crisis
     runtime: node
-    buildCommand: yarn install && yarn render
+    buildCommand: yarn install && yarn assets
     startCommand: yarn start
     healthCheckPath: /healthz
     envVars:

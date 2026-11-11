@@ -58,6 +58,7 @@ export class Game {
     this.renderer.setSize(w, h, false);
     this.camera.aspect = w / h; this.camera.updateProjectionMatrix();
     this.garage.cam.aspect = w / h; this.garage.cam.updateProjectionMatrix();
+    if (this.ow) this.ow.resize();
   }
   applyTheme(k) { this.settings.theme = k; this.world.setTheme(k, this.rm.roadMat, this.scene); this.nightish = THEMES[k].head; }
 
@@ -144,6 +145,7 @@ export class Game {
   reset(mode, def, up, demo, track) {
     this.track = track || this.track || trackById('guia-circuit-macau');
     this.road.configure(this.track.params); this.world.setStyle(this.track.style, this.rm);
+    if (this.rm.barMat) this.rm.barMat.color.set(this.track.style === 'oval' ? 0x37d6c4 : 0xffffff); // teal speedway walls
     this.applySky(this.track); this.props.setup(this.track.id, this.track.style);
     this.mode = mode; this.def = def; this.up = up || { eng: 0, tur: 0, tyr: 0, brk: 0 }; this.demo = !!demo;
     this.st = statsFor(def, this.up);
@@ -212,6 +214,7 @@ export class Game {
   frame(dt) {
     this.clock += dt;
     if (this.state === 'garage') { this.renderGarage(dt); return; }
+    if ((this.state === 'open' || this.state === 'openpaused') && this.ow) { this.ow.frame(dt, this.state === 'open'); return; }
     if (this.state === 'play' || this.state === 'title') this.step(dt);
     this.updateCamera(dt);
     this.world.update(this.p.s, this.camera.position, this.state === 'paused' ? 0 : this.p.v, dt, this.clock);

@@ -4,6 +4,7 @@ import { Sound } from './audio.js';
 import { CARS, carById, STARTER } from './cars.js';
 import { TRACKS, trackById, STYLE_INFO } from './tracks.js';
 import { store, clamp, hash } from './util.js';
+import { OpenWorld } from './openworld.js';
 
 const $ = (id) => document.getElementById(id);
 const SAVE_KEY = 'umuhanda.save.v2';
@@ -46,10 +47,11 @@ const hide = (id) => $(id).classList.add('hide');
 const screens = ['title', 'modes', 'garage', 'tracks', 'settings', 'pause', 'over'];
 function go(id) { screens.forEach(hide); if (id) show(id); $('hud').classList.toggle('hide', id !== null && id !== 'pause'); }
 
-let runMode = 'highway', theme = 'auto', dens = 1;
+let runMode = 'open', theme = 'auto', dens = 1;
 
 function applyCar() { const def = carById(save.sel); game.paint = paintOf(def); game.glow = save.glow[def.id] || null; return def; }
 function demo() {
+  document.body.classList.remove('ow-mode'); if (game.ow) game.ow.hideHud();
   const def = applyCar(); game.settings.density = 1;
   game.reset('highway', def, upOf(def.id), true, trackById(save.track)); game.settings.theme = trackById(save.track).theme; game.applyTheme(game.settings.theme); game.state = 'title';
 }
@@ -105,7 +107,18 @@ chipGroup('#themeChips', (b) => { theme = b.dataset.t; });
 chipGroup('#densChips', (b) => { dens = parseFloat(b.dataset.d); });
 $('mGo').onclick = () => startRun();
 function refreshTrackCard() { const t = trackById(save.track); setImg($('tcImg'), t.img, t.name, 't'); $('tcName').textContent = t.name; $('tcMeta').textContent = `${t.label}${t.country ? ' · ' + t.country : ''}`; }
+function startOpen() {
+  sound.init();
+  const def = applyCar(), up = upOf(def.id);
+  if (!game.ow) game.ow = new OpenWorld(game);
+  game.ow.start(def, up, statsFor(def, up), game.paint, game.glow);
+  game.state = 'open'; document.body.classList.add('ow-mode');
+  $('pops').innerHTML = ''; go(null); $('hud').classList.remove('hide'); flashHint();
+  game.popup('OPEN WORLD — DRIVE ANYWHERE', 'good');
+}
 function startRun() {
+  if (runMode === 'open') return startOpen();
+  document.body.classList.remove('ow-mode'); if (game.ow) game.ow.hideHud();
   sound.init();
   const def = applyCar(), tr = trackById(save.track);
   game.settings.theme = theme === 'auto' ? tr.theme : theme; game.settings.density = dens;
@@ -177,9 +190,9 @@ $('gBack').onclick = leaveGarage;
 function leaveGarage() { demo(); go('title'); }
 
 /* ---------- pause / result ---------- */
-game.onPauseKey = () => { if (game.state === 'play') pause(); else if (game.state === 'paused') resume(); };
-function pause() { game.state = 'paused'; go('pause'); $('hud').classList.remove('hide'); }
-function resume() { game.state = 'play'; go(null); $('hud').classList.remove('hide'); game.last = performance.now(); }
+game.onPauseKey = () => { if (game.state === 'play' || game.state === 'open') pause(); else if (game.state === 'paused' || game.state === 'openpaused') resume(); };
+function pause() { game.state = game.state === 'open' ? 'openpaused' : 'paused'; go('pause'); $('hud').classList.remove('hide'); }
+function resume() { game.state = game.state === 'openpaused' ? 'open' : 'play'; go(null); $('hud').classList.remove('hide'); game.last = performance.now(); }
 $('pauseBtn').onclick = pause; $('pResume').onclick = resume;
 $('pRestart').onclick = () => startRun();
 $('pQuit').onclick = () => { demo(); go('title'); };
@@ -226,7 +239,7 @@ setInterval(() => {
   b.addEventListener('pointerdown', on); b.addEventListener('pointerup', off); b.addEventListener('pointercancel', off); b.addEventListener('pointerleave', off);
 });
 $('tC').addEventListener('pointerdown', (e) => { e.preventDefault(); game.nextView(); });
-document.addEventListener('visibilitychange', () => { if (document.hidden && game.state === 'play') pause(); });
+document.addEventListener('visibilitychange', () => { if (document.hidden && (game.state === 'play' || game.state === 'open')) pause(); });
 document.addEventListener('contextmenu', (e) => { if (e.target.tagName !== 'INPUT') e.preventDefault(); });
 
 go('title'); demo();

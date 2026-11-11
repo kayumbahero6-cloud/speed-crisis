@@ -94,3 +94,5 @@ input#gSearch,input#tSearch{flex:1;min-width:120px;max-width:320px;padding:9px 1
 .ostats{display:grid;grid-template-columns:1fr auto;gap:6px 18px;font-size:15px}.ostats b{text-align:right;color:var(--ac)}
 #over h2.bad{color:#ff5470}#over h2.good{color:#7dff9b}
 @media (max-width:640px){.cards{grid-template-columns:1fr}.gInfo{max-height:48vh}#title{align-items:center;text-align:center}}
+
+body.ow-mode #topL,body.ow-mode #topC,body.ow-mode #carBadge,body.ow-mode #botL,body.ow-mode #botC,body.ow-mode #botR,body.ow-mode #hint{display:none!important}

@@ -24,6 +24,7 @@ scenery to `assets/` and run `node tools/build-manifest.mjs` — see **assets/RE
 Notes: matching is by name, so some cars may get no model (generic body is used) or a lower-quality one; check `CREDITS.md` after the first deploy. Without a token only the skies are downloaded. To use your own hand-picked models instead, put them in `assets/` and commit them (see assets/README.md).
 
 ## Modes
+- **Open World** (default) – endless free-roam map: hills, lakes, forests, a town with buildings at every crossroads, roaming traffic, day/night cycle (T), minimap, checkpoint races (E), respawn (R). Speedway stock cars (#45, #11, #24, #5, #9) are in the Garage; the Speedway circuits have teal walls.
 - **Highway Rush** – two-way traffic on a curving hilly road. Pass cars closely for **near-miss combos**; drive in the oncoming lane for double points.
 - **Hot Pursuit** – police chase you. Cops ram, flank and set **roadblocks**. Take them down by ramming, shake them off to fill the ESCAPE bar and raise the **HEAT**. Stay close to cops too long and the BUSTED bar fills.
 - Time of day: Day, Sunset, Night, Rain. Traffic: Light / Normal / Heavy.

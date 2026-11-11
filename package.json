@@ -9,7 +9,9 @@
     "assets": "node tools/fetch-assets.mjs && node tools/build-manifest.mjs",
     "dist": "node tools/make-dist.mjs",
     "render": "npm run assets && npm run build && npm run dist",
-    "build:all": "npm run assets && npm run build && npm run dist"
+    "build:all": "npm run assets && npm run build && npm run dist",
+    "postinstall": "npm run build",
+    "check": "esbuild src/main.js --bundle --format=esm --outfile=/dev/null"
   },
   "keywords": [],
   "author": "",

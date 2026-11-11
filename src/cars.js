@@ -75,7 +75,11 @@ function build(name, img, desc, i) {
     paint, sh, geoId: 'tpl' + tpl, img, desc,
   };
 }
-export const CARS = CAR_LIST.map(([name, img, desc], i) => build(name, img, desc, i)).sort((a, b) => a.price - b.price || a.name.localeCompare(b.name));
+/* Speedway stock cars: low, wide, flat-sided racing sedans (generic, unbranded) */
+const STOCK_SH = { L: 5.0, W: 1.96, r: 0.2, noseH: 0.5, hoodY: 0.72, beltY: 0.86, trunkY: 0.9, tailH: 0.82, cf: 0.95, rfx: 0.35, rrx: -1.05, cr: -1.65, roofY: 1.27, wr: 0.36, wb: 2.95, sp: 'lip' };
+const STOCK = [['Speedway Stock #45', '#14161a', 300], ['Speedway Stock #11', '#e8b923', 296], ['Speedway Stock #24', '#2e6ec9', 298], ['Speedway Stock #5', '#d6342b', 294], ['Speedway Stock #9', '#3fb6a8', 292]]
+  .map(([name, paint, top], i) => ({ id: name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-$/, ''), name, cls: 'Stock Car', tier: 4, price: 0, top, acc: 10.5 + i * 0.1, hnd: 1.18, brk: 31, nit: 1.1, paint, sh: { ...STOCK_SH }, geoId: 'stock', img: null, desc: 'Speedway stock car' }));
+export const CARS = CAR_LIST.map(([name, img, desc], i) => build(name, img, desc, i)).concat(STOCK).sort((a, b) => a.price - b.price || a.name.localeCompare(b.name));
 export const carById = (id) => CARS.find((c) => c.id === id) || CARS[0];
 export const STARTER = 'honda-integra-type-r-dc2';
 

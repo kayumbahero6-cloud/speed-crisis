@@ -250,7 +250,7 @@ export function buildRoadMeshes(road, renderer) {
   ], rows, step, new THREE.MeshBasicMaterial({ map: nt, side: THREE.DoubleSide, fog: false }), 40);
   neon.mesh.visible = false; group.add(neon.mesh);
   return {
-    group, roadMat, farMat, far, groundMat: gMat, neonMesh: neon.mesh, update(s, cx, cz) {
+    group, roadMat, farMat, far, barMat: bMat, groundMat: gMat, neonMesh: neon.mesh, update(s, cx, cz) {
       far.position.x = cx; far.position.z = cz;
       const s0 = s - 60;
       roadRib.update(s0); rails.update(s0); groundRib.update(s - 100); if (neon.mesh.visible) neon.update(s0);
