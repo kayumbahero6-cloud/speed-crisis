@@ -1,21 +1,26 @@
 {
- "name": "umuhanda",
- "version": "1.0.0",
- "description": "",
- "main": "index.js",
- "scripts": {
-  "build": "esbuild src/main.js --bundle --minify --format=esm --target=es2020 --outfile=js/game.js",
-  "assets": "node tools/fetch-assets.mjs && node tools/build-manifest.mjs",
-  "dist": "node tools/make-dist.mjs",
-  "render": "npm run assets && npm run build && npm run dist"
- },
- "keywords": [],
- "author": "",
- "license": "ISC",
- "dependencies": {
-  "adm-zip": "^0.6.1",
-  "esbuild": "^0.28.2",
-  "three": "^0.187.0"
- },
- "type": "commonjs"
+  "name": "speed-crisis",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "build": "esbuild src/main.js --bundle --minify --format=esm --target=es2020 --outfile=js/game.js",
+    "assets": "node tools/fetch-assets.mjs && node tools/build-manifest.mjs",
+    "dist": "node tools/make-dist.mjs",
+    "render": "npm run assets && npm run build && npm run dist",
+    "build:all": "npm run assets && npm run build && npm run dist"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "adm-zip": "^0.6.1",
+    "esbuild": "^0.28.2",
+    "three": "^0.187.0"
+  },
+  "type": "commonjs",
+  "engines": {
+    "node": ">=18"
+  }
 }

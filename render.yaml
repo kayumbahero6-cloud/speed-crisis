@@ -1,12 +1,15 @@
 services:
   - type: web
-    name: umuhanda
-    runtime: static
-    buildCommand: npm ci && npm run render
-    staticPublishPath: dist
+    name: speed-crisis
+    runtime: node
+    buildCommand: yarn install && yarn render
+    startCommand: yarn start
+    healthCheckPath: /healthz
     envVars:
+      - key: NODE_VERSION
+        value: "20"
       - key: SKETCHFAB_TOKEN
-        sync: false          # paste your Sketchfab API token in the Render dashboard
+        sync: false          # optional: paste your Sketchfab API token in the Render dashboard
       - key: BUDGET_MB
         value: "800"
       - key: HDRI_RES
